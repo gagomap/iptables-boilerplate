@@ -39,31 +39,17 @@ And follow these steps to install:
     git clone git://github.com/bmaeser/iptables-boilerplate.git
     cd iptables-boilerplate
     sudo make
+    sudo reboot
+
+Must reboot to install ipset and blacklist
 
 To uninstall run:
 
     sudo make uninstall
 
-### On other systems
+### On other systems view: https://github.com/bmaeser/iptables-boilerplate
 
-create necessary directories first
-    
-    sudo mkdir /etc/firewall
-    sudo mkdir /etc/firewall/custom
 
-checkout the github repo and install the files
-
-    git clone git://github.com/bmaeser/iptables-boilerplate.git
-    cd iptables-boilerplate
-    sudo cp firewall /etc/init.d/firewall
-    cd etc/firewall/
-    sudo cp *.conf /etc/firewall/
-    
-make sure firewall is executable and update runnlevels
-
-    sudo chmod 755 /etc/init.d/firewall
-    sudo update-rc.d firewall defaults
-    
 ## Configuration
 
 All configuration-files are to be found at /etc/firewall/
@@ -156,12 +142,7 @@ fork + hack + pull request please :-)
 
 thx
 
-## From gagomap: Adding auto install Ipset and my blacklist
-
-You can change my username (gagomap) in this command (in make file) to your username on your VPS:
-```bash
-cp /home/gagomap/iptables-boilerplate/custom/iptablesrules.sh /etc/firewall/custom/iptablesrules.sh
-```
+## From gagomap: Adding auto install Ipset and my blacklist. Blacklist will auto update everyday. 
 
 ## Licence
 The MIT License (MIT)
