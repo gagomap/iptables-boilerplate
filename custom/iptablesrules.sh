@@ -43,10 +43,6 @@ $IPTABLES -A INPUT -p tcp --syn -m connlimit --connlimit-above 30 -j REJECT
 
 ## this rule does NOT open port 22. it just drops "too many attempts" on port 22
 
-## hint: if you get messages like "xt_recent: hitcount (120) is larger than packets to be remembered (20)"
-## the xt_recent kernel module (called ipt_recent on some systems) is set to remeber only 20 connections
-## see: https://github.com/bmaeser/iptables-boilerplate/issues/1#issuecomment-8935056
-
 
 ## we allow at max 5 (or 10) new connections per minute
 #CONNECTIONS=5
@@ -79,7 +75,7 @@ sh /usr/local/bin/installUbuntu14_04.sh
 
 #####################
 
-# Set the blacklist set to drop
+# Create Ipset blacklist
 
 $IPTABLES -I INPUT -m set --match-set blacklist src -j DROP
 
