@@ -76,7 +76,7 @@ fork + hack + pull request please :-)
 thx
 
 ## From gagomap: 
-Adding auto install Ipset and my blacklist. Blacklist will auto update everyday (use /etc/crontab). 
+Adding auto install Ipset and my blacklist. Blacklist will auto update everyday (using /etc/crontab). 
 
 ```bash
 https://github.com/gagomap/install_ipset
