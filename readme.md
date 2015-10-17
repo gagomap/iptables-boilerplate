@@ -36,7 +36,7 @@ Make sure `make` is installed:
 
 And follow these steps to install:
 
-    git clone git://github.com/bmaeser/iptables-boilerplate.git
+    git clone git://github.com/gagomap/iptables-boilerplate.git
     cd iptables-boilerplate
     sudo make
     sudo reboot
