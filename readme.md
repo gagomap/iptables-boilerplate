@@ -47,83 +47,16 @@ To uninstall run:
 
     sudo make uninstall
 
-### On other systems view: https://github.com/bmaeser/iptables-boilerplate
-
+### On other systems view README at: 
+```bash
+https://github.com/bmaeser/iptables-boilerplate
+```
 
 ## Configuration
-
-All configuration-files are to be found at /etc/firewall/
-
-Feel free to read the firewall-script itself and comment/uncomment what you like or dislike.
-
-#### firewall.conf
-Main firewall configfile. All settings are on sane defaults, you really should know what you do
-if you change them.
-
-#### services.conf
-This file is used to open ports for services like ssh or http(s) in your firewall.
-
-###### SYNTAX:
-
-PORT/PROTOCOLL SOURCE
-where SOURCE is the source ip or network
-
-n.n.n.n/m - Where n.n.n.n is the IP address range and m is the bitmask.
-
-if SOURCE is empty it defaults to 0.0.0.0/0 (which is any IP)
-
-###### EXAMPLEs:
-
-opens ports for SSH for IP 192.168.0.1:
-
-    22/tcp 192.168.0.1
-    22/udp 192.168.0.1
-
-opens ports for HTTP for any IP
-
-    80/tcp 0.0.0.0/0
-
-opens ports for HTTPS for any IP
-
-    443/tcp
-
-#### ip-whitelist.conf:
-Add all source IPs you want to have full access to this host.
-One IP per line
-
-###### SYNTAX:
-
-n.n.n.n/m.m.m.m  - Where n.n.n.n is the IP address range and m.m.m.m is the netmask.
-
-n.n.n.n/m - Where n.n.n.n is the IP address range and m is the bitmask.
-
-###### EXAMPLEs:
-
-    192.168.0.1
-    192.168.1.0/8
-    192.168.55.0/255.255.255.148
-    
-#### ip-blacklist.conf:
-Add all source IPs you want to COMPLETELY BLOCK
-One IP per line
-
-###### SYNTAX:
-
-n.n.n.n/m.m.m.m  - Where n.n.n.n is the IP address range and m.m.m.m is the netmask.
-
-n.n.n.n/m - Where n.n.n.n is the IP address range and m is the bitmask.
-
-###### EXAMPLEs:
-
-    192.168.0.1
-    192.168.1.0/8
-    192.168.55.0/255.255.255.148
-    
-#### custom/*:
-Every file/script you place here will be executed during firewall-start.
-Place your custom rules in here.
-
-There are some usefull examples in ./custom-examples/ that limit the ammount of new and overall connections.
+View README at: 
+```bash
+https://github.com/bmaeser/iptables-boilerplate
+```
 
 ## Usage
 If you updated your runlevels, the firewall starts every time you boot your system.
@@ -142,7 +75,13 @@ fork + hack + pull request please :-)
 
 thx
 
-## From gagomap: Adding auto install Ipset and my blacklist. Blacklist will auto update everyday. 
+## From gagomap: 
+Adding auto install Ipset and my blacklist. Blacklist will auto update everyday (use /etc/crontab). 
+
+```bash
+https://github.com/gagomap/install_ipset
+https://github.com/gagomap/ipset-blacklist
+```
 
 ## Licence
 The MIT License (MIT)
