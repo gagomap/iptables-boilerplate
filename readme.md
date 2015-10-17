@@ -158,6 +158,10 @@ thx
 
 ## From gagomap: Adding auto install Ipset and my blacklist
 
+You can change my username (gagomap) in this command (in make file) to your username on your VPS:
+```bash
+cp /home/gagomap/iptables-boilerplate/custom/iptablesrules.sh /etc/firewall/custom/iptablesrules.sh
+```
 
 ## Licence
 The MIT License (MIT)
