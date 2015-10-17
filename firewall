@@ -64,8 +64,8 @@ case "$1" in
 
         ## invalid drop
         $IPTABLES -N invalid_drop
-        $IPTABLES -A invalid_drop -m state --state INVALID -m limit --limit 60/m -j LOG --log-prefix "INVALID PACKAGE"
-        $IPTABLES -A invalid_drop -m state --state INVALID -j DROP
+        $IPTABLES -A invalid_drop -m conntrack --ctstate INVALID -m limit --limit 60/m -j LOG --log-prefix "INVALID PACKAGE"
+        $IPTABLES -A invalid_drop -m conntrack --ctstate INVALID -j DROP
 
         #################################################################
         # IPv4 FORWARDING 
@@ -96,8 +96,8 @@ case "$1" in
         $IPTABLES -A INPUT -p icmp -j ACCEPT
 
         ## allow all packets that already have a connection
-        $IPTABLES -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-        $IPTABLES -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+        $IPTABLES -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+        $IPTABLES -A OUTPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
         ##################################################################
         # EXTERNAL CONFIGS
@@ -105,12 +105,12 @@ case "$1" in
 
         ## ACCEPT ALL CONNECTIONS FROM WHITELIST FILE /etc/firewall/ip-whitelist.conf
         for IP in `cat /etc/firewall/ip-whitelist.conf | sed 's/\s/_/g' | grep -v "^#"`; do
-            $IPTABLES -A INPUT -s $IP -m state --state NEW -j ACCEPT
+            $IPTABLES -A INPUT -s $IP -m conntrack --ctstate NEW -j ACCEPT
         done;
 
         ## DROP ALL CONNECTIONS FROM BLACKLIST FILE /etc/firewall/ip-blacklist.conf
         for IP in `cat /etc/firewall/ip-blacklist.conf | sed 's/\s/_/g' | grep -v "^#"`; do
-            $IPTABLES -A INPUT -s $IP -m state --state NEW -j DROP
+            $IPTABLES -A INPUT -s $IP -m conntrack --ctstate NEW -j DROP
         done;
 
         # EXECUTE ALL CUSTOM SCRIPTS IN /etc/firewall/custom
@@ -134,7 +134,7 @@ case "$1" in
                 if [ ${#SERVICES[@]} == 2 ]; then
                     IP=${SERVICES[1]}
                 fi;
-                $IPTABLES -A INPUT -p $PROTO -s $IP --dport $PORT -m state --state NEW -j ACCEPT
+                $IPTABLES -A INPUT -p $PROTO -s $IP --dport $PORT -m conntrack --ctstate NEW -j ACCEPT
                 done <<< "$line"
         done;
 
@@ -143,8 +143,8 @@ case "$1" in
         #################################################################
 
         if $drop_invalid ; then
-            $IPTABLES -A INPUT -m state --state INVALID -j invalid_drop
-            $IPTABLES -A OUTPUT -m state --state INVALID -j invalid_drop
+            $IPTABLES -A INPUT -m conntrack --ctstate INVALID -j invalid_drop
+            $IPTABLES -A OUTPUT -m conntrack --ctstate INVALID -j invalid_drop
         fi
 
         ##################################################################
