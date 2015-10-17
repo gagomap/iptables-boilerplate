@@ -47,7 +47,8 @@ To uninstall run:
 
     sudo make uninstall
 
-### On other systems view README at: 
+### On other systems 
+View README at: 
 ```bash
 https://github.com/bmaeser/iptables-boilerplate
 ```
