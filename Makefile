@@ -5,7 +5,7 @@ all:
 	@mkdir /etc/firewall
 	@mkdir /etc/firewall/custom
 	@echo "etc folder created"
-	@cp etc/firewall/custom/iptablesrules.sh /etc/firewall/custom/iptablesrules.sh
+	@cp -f etc/firewall/custom/iptablesrules.sh /etc/firewall/custom/iptablesrules.sh
 	@chmod 755 /etc/firewall/custom/iptablesrules.sh
 	@install -m 755 firewall /etc/init.d/firewall
 	@echo "Program added to init directory"
