@@ -52,7 +52,7 @@ $IPTABLES -A INPUT -p tcp --syn -m connlimit --connlimit-above 30 -j REJECT
 #IPTABLES=/sbin/iptables
 
 $IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --set
-$IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 5 -j DROP
+$IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
 
 #####################
 #/bin/bash
@@ -65,7 +65,7 @@ $IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --upda
 
 #IPTABLES=/sbin/iptables
 
-$IPTABLES -A INPUT -p tcp --syn --dport 22 -m connlimit --connlimit-above 5 -j REJECT
+$IPTABLES -A INPUT -p tcp --syn --dport 22 -m connlimit --connlimit-above 10 -j REJECT
 
 #####################
 
@@ -85,7 +85,5 @@ $IPTABLES -I INPUT -m set --match-set blacklist src -j DROP
 
 #####################
 
-#service fail2ban restart
-
-#save the current firewall config to be reapplied at restart
-#$IPTABLES-save | tee /etc/iptables.rules
+# save the current firewall config to be reapplied at restart
+# $IPTABLES-save | tee /etc/iptables.rules
