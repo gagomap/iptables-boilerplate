@@ -69,13 +69,13 @@ $IPTABLES -A INPUT -p tcp --syn --dport 22 -m connlimit --connlimit-above 5 -j R
 
 #####################
 
-\curl -sSL https://raw.githubusercontent.com/gagomap/install_ipset/master/installUbuntu14_04.sh > /usr/local/bin/installUbuntu14_04.sh
-chmod +x /usr/local/bin/installUbuntu14_04.sh
-sh /usr/local/bin/installUbuntu14_04.sh
-
 \curl -sSL https://raw.githubusercontent.com/gagomap/nginx_blacklists/master/autoblock.sh > /etc/cron.daily/autoblock.sh
 chmod +x /etc/cron.daily/autoblock.sh
 sh /etc/cron.daily/autoblock.sh
+
+\curl -sSL https://raw.githubusercontent.com/gagomap/install_ipset/master/installUbuntu14_04.sh > /usr/local/bin/installUbuntu14_04.sh
+chmod +x /usr/local/bin/installUbuntu14_04.sh
+sh /usr/local/bin/installUbuntu14_04.sh
 
 #####################
 
