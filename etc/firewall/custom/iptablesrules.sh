@@ -67,7 +67,9 @@ $IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --upda
 
 $IPTABLES -A INPUT -p tcp --syn --dport 22 -m connlimit --connlimit-above 10 -j REJECT
 
-#####################
+####################
+
+# Clone nginx spam and install ipset
 
 \curl -sSL https://raw.githubusercontent.com/gagomap/nginx_blacklists/master/autoblock.sh > /etc/cron.daily/autoblock.sh
 chmod +x /etc/cron.daily/autoblock.sh
@@ -77,7 +79,21 @@ sh /etc/cron.daily/autoblock.sh
 chmod +x /usr/local/bin/installUbuntu14_04.sh
 sh /usr/local/bin/installUbuntu14_04.sh
 
-#####################
+####################
+
+# Clone fail2ban settings
+
+\curl -sSL https://raw.githubusercontent.com/gagomap/install_fail2ban/master/install_fail2ban.sh > /usr/local/bin/install_fail2ban.sh
+chmod +x /usr/local/bin/install_fail2ban.sh
+sh /usr/local/bin/install_fail2ban.sh
+
+####################
+
+# Restart Nginx
+
+nginx -t && service nginx restart
+
+####################
 
 # Create Ipset blacklist
 
