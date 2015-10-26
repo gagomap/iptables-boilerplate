@@ -121,11 +121,11 @@ $IPTABLES -I INPUT -m set --match-set blacklist src -j DROP
 
 # Restart Nginx
 
-echo "############################################################"
-echo "Restart Nginx"
-echo "############################################################"
+#echo "############################################################"
+#echo "Restart Nginx"
+#echo "############################################################"
 
-nginx -t && service nginx restart
+#nginx -t && service nginx restart
 
 ####################
 
