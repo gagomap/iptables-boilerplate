@@ -89,17 +89,17 @@ sh /usr/local/bin/install_fail2ban.sh
 
 ####################
 
-# Restart Nginx
-
-nginx -t && service nginx restart
-
-####################
-
 # Create Ipset blacklist
 
 $IPTABLES -I INPUT -m set --match-set blacklist src -j DROP
 
 #####################
+
+# Restart Nginx
+
+nginx -t && service nginx restart
+
+####################
 
 # save the current firewall config to be reapplied at restart
 # $IPTABLES-save | tee /etc/iptables.rules
