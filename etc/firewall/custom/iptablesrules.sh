@@ -22,7 +22,9 @@ IP6TABLES=/sbin/ip6tables
 $IPTABLES -A INPUT -p tcp -m conntrack --ctstate NEW -m recent --set
 $IPTABLES -A INPUT -p tcp -m conntrack --ctstate NEW -m recent --update --seconds 5 --hitcount 20 -j DROP
 
+echo "############################################################"
 ####################
+echo "############################################################"
 #/bin/bash
 
 ## Limit the amount of connections on per remote-ip
@@ -33,7 +35,9 @@ $IPTABLES -A INPUT -p tcp -m conntrack --ctstate NEW -m recent --update --second
 
 $IPTABLES -A INPUT -p tcp --syn -m connlimit --connlimit-above 30 -j REJECT
 
+echo "############################################################"
 #####################
+echo "############################################################"
 #/bin/bash
 
 ## Limit the amount of NEW connections on port 22
@@ -54,7 +58,9 @@ $IPTABLES -A INPUT -p tcp --syn -m connlimit --connlimit-above 30 -j REJECT
 $IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --set
 $IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
 
+echo "############################################################"
 #####################
+echo "############################################################"
 #/bin/bash
 
 ## Limit the amount of connections on port 22 per remote-ip
@@ -67,16 +73,23 @@ $IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --upda
 
 $IPTABLES -A INPUT -p tcp --syn --dport 22 -m connlimit --connlimit-above 10 -j REJECT
 
-####################
+echo "############################################################"
+##################################################################
+echo "############################################################"
 
 # Clone nginx spam and install ipset
-echo " clone nginx spam"
+
+echo "############################################################"
+echo "clone nginx spam"
+echo "############################################################"
 
 \curl -sSL https://raw.githubusercontent.com/gagomap/nginx_blacklists/master/autoblock.sh > /etc/cron.daily/autoblock.sh
 chmod +x /etc/cron.daily/autoblock.sh
 sh /etc/cron.daily/autoblock.sh
 
+echo "############################################################"
 echo "install ipset"
+echo "############################################################"
 
 \curl -sSL https://raw.githubusercontent.com/gagomap/install_ipset/master/installUbuntu14_04.sh > /usr/local/bin/installUbuntu14_04.sh
 chmod +x /usr/local/bin/installUbuntu14_04.sh
@@ -85,7 +98,10 @@ sh /usr/local/bin/installUbuntu14_04.sh
 ####################
 
 # Clone fail2ban settings
+
+echo "############################################################"
 echo "update fail2ban settings"
+echo "############################################################"
 
 \curl -sSL https://raw.githubusercontent.com/gagomap/install_fail2ban/master/install_fail2ban.sh > /usr/local/bin/install_fail2ban.sh
 chmod +x /usr/local/bin/install_fail2ban.sh
@@ -95,11 +111,19 @@ sh /usr/local/bin/install_fail2ban.sh
 
 # Create Ipset blacklist
 
+echo "############################################################"
+echo "Create Ipset blacklist"
+echo "############################################################"
+
 $IPTABLES -I INPUT -m set --match-set blacklist src -j DROP
 
 #####################
 
 # Restart Nginx
+
+echo "############################################################"
+echo "Restart Nginx"
+echo "############################################################"
 
 nginx -t && service nginx restart
 
