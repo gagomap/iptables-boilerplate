@@ -85,7 +85,6 @@ echo "############################################################"
 
 \curl -sSL https://raw.githubusercontent.com/gagomap/nginx_blacklists/master/autoblock.sh > /etc/cron.daily/autoblock.sh
 chmod +x /etc/cron.daily/autoblock.sh
-sh /etc/cron.daily/autoblock.sh
 
 echo "############################################################"
 echo "install ipset"
@@ -116,16 +115,6 @@ echo "Create Ipset blacklist"
 echo "############################################################"
 
 $IPTABLES -I INPUT -m set --match-set blacklist src -j DROP
-
-#####################
-
-# Restart Nginx
-
-#echo "############################################################"
-#echo "Restart Nginx"
-#echo "############################################################"
-
-#nginx -t && service nginx restart
 
 ####################
 
