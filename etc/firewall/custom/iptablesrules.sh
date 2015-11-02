@@ -91,10 +91,7 @@ $IPTABLES -I INPUT -m set --match-set blacklist src -j DROP
 
 echo "############################################################"
 
-## echo "Start ddos-deflate service"
-
-## service ddos restart
-
+echo "END"
 # save the current firewall config to be reapplied at restart
 # $IPTABLES-save | tee /etc/iptables.rules
 echo "############################################################"
