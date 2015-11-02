@@ -75,7 +75,6 @@ echo "Install ipset"
 chmod +x /usr/local/bin/installUbuntu14_04.sh
 sh /usr/local/bin/installUbuntu14_04.sh
 
-
 echo "############################################################"
 
 echo "Update fail2ban settings"
