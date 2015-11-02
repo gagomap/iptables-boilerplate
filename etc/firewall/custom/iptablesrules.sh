@@ -62,7 +62,7 @@ echo "Limit the amount of connections on port 22 per remote-ip"
 
 echo "############################################################"
 
-echo "Clone nginx spam and install ipset"
+echo "Clone nginx spam"
 
 \curl -sSL https://raw.githubusercontent.com/gagomap/nginx_blacklists/master/autoblock.sh > /etc/cron.daily/autoblock.sh
 chmod +x /etc/cron.daily/autoblock.sh
