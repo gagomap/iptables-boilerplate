@@ -2,12 +2,6 @@
 echo "Limit the amount of NEW connections " 
 
 ## https://github.com/bmaeser/iptables-boilerplate/tree/master/custom-examples
-## to a maximum of $CONNECTIONS per $SECONDS per remote-ip
-## this is usefull, if someone tries to DOS or synflood your box
-## and helps to prevent dictonary-attacks
-## hint: if you get messages like "xt_recent: hitcount (120) is larger than packets to be remembered (20)"
-## the xt_recent kernel module (called ipt_recent on some systems) is set to remeber only 20 connections
-## see: https://github.com/bmaeser/iptables-boilerplate/issues/1#issuecomment-8935056
 
 ## we allow at max 120 new connections per minute
 #CONNECTIONS=120 or 20
@@ -22,9 +16,9 @@ IP6TABLES=/sbin/ip6tables
 
 echo "############################################################"
 
-# /bin/bash
-
 echo "Limit the amount of connections on per remote-ip"
+
+# /bin/bash
 
 # CONNECTIONS=30
 
@@ -35,39 +29,36 @@ echo "Limit the amount of connections on per remote-ip"
 
 echo "############################################################"
 
-#/bin/bash
-
 echo "Limit the amount of NEW connections on port 22"
-## to a maximum of $CONNECTIONS per $SECONDS per remote-ip
-## this is usefull, if someone tries to DOS or synflood your box
-## and helps to prevent dictonary-attacks
+
+#/bin/bash
 
 ## this rule does NOT open port 22. it just drops "too many attempts" on port 22
 
 
 ## we allow at max 5 (or 10) new connections per minute
-#CONNECTIONS=5
-#SECONDS=60
+## CONNECTIONS=5
+## SECONDS=60
 
 
-#IPTABLES=/sbin/iptables
-
-$IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --set
-$IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
+## IPTABLES=/sbin/iptables
+## We disable it, bescause fail2ban stop bruteforces and ddos port 22
+## $IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --set
+## $IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
 
 echo "############################################################"
 
-#/bin/bash
-
 echo "Limit the amount of connections on port 22 per remote-ip"
+
+#/bin/bash
 
 ## this rule does NOT open port 22. it just drops "too many connections" on port 22
 
-# CONNECTIONS=5
+## CONNECTIONS=5
 
-# IPTABLES=/sbin/iptables
-
-$IPTABLES -A INPUT -p tcp --syn --dport 22 -m connlimit --connlimit-above 10 -j REJECT
+## IPTABLES=/sbin/iptables
+## We disable it, bescause fail2ban stop bruteforces and ddos port 22
+## $IPTABLES -A INPUT -p tcp --syn --dport 22 -m connlimit --connlimit-above 10 -j REJECT
 
 echo "############################################################"
 
@@ -94,16 +85,17 @@ chmod +x /usr/local/bin/install_fail2ban.sh
 sh /usr/local/bin/install_fail2ban.sh
 
 echo "############################################################"
+
 echo "Create Ipset blacklist"
 
 $IPTABLES -I INPUT -m set --match-set blacklist src -j DROP
 
+echo "############################################################"
 
 echo "Start ddos-deflate service"
 
 service ddos start
 
-echo "############################################################"
 # save the current firewall config to be reapplied at restart
 # $IPTABLES-save | tee /etc/iptables.rules
 echo "############################################################"
