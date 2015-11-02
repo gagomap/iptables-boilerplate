@@ -42,7 +42,7 @@ echo "Limit the amount of NEW connections on port 22"
 
 
 ## IPTABLES=/sbin/iptables
-## We disable it, bescause fail2ban stop bruteforces and ddos port 22
+## We disable it, bescause fail2ban stop bruteforces and ddos on port 22
 ## $IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --set
 ## $IPTABLES -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
 
@@ -57,7 +57,7 @@ echo "Limit the amount of connections on port 22 per remote-ip"
 ## CONNECTIONS=5
 
 ## IPTABLES=/sbin/iptables
-## We disable it, bescause fail2ban stop bruteforces and ddos port 22
+## We disable it, bescause fail2ban stop bruteforces and ddos on port 22
 ## $IPTABLES -A INPUT -p tcp --syn --dport 22 -m connlimit --connlimit-above 10 -j REJECT
 
 echo "############################################################"
