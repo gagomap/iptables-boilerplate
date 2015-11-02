@@ -84,6 +84,13 @@ https://github.com/gagomap/install_ipset
 https://github.com/gagomap/ipset-blacklist
 ```
 
+Support fail2ban and ddos-flate at boot.
+Link:
+
+```bash
+https://github.com/jgmdev/ddos-deflate
+```
+
 ## Licence
 The MIT License (MIT)
 Copyright © Bernhard Mäser(http://bmaeser.io) and contributors
