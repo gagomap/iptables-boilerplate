@@ -307,6 +307,8 @@ case "$1" in
         $IPTABLES -A INPUT -j REJECT
         
         echo "firewall started"
+		echo "restarting ddos-flate"
+		/etc/init.d/ddos restart 
 	    echo "restarting fail2ban"
 	    /etc/init.d/fail2ban restart
         ;;
@@ -314,6 +316,8 @@ case "$1" in
     stop)
 	    echo "stopping fail2ban"
 	    /etc/init.d/fail2ban stop
+		echo "stopping ddos-flate"
+		/etc/init.d/ddos stop
         echo "stopping firewall..."
         
         ## delete old rules
