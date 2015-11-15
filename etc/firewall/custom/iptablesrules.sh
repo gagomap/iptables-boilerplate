@@ -83,11 +83,11 @@ echo "Update fail2ban settings"
 chmod +x /usr/local/bin/install_fail2ban.sh
 sh /usr/local/bin/install_fail2ban.sh
 
-echo "############################################################"
+# echo "############################################################"
 
-echo "Create Ipset blacklist"
+# echo "Create Ipset blacklist"
 
-$IPTABLES -I INPUT -m set --match-set blacklist src -j DROP
+# $IPTABLES -I INPUT -m set --match-set blacklist src -j DROP
 
 echo "############################################################"
 
